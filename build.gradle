@@ -1,0 +1,41 @@
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.8.RELEASE")
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile('com.google.guava:guava:23.0')
+    compile('org.springframework.boot:spring-boot-starter') {
+        exclude module: 'log4j-over-slf4j'
+        exclude module: 'jul-to-slf4j'
+    }
+    compile('org.springframework.boot:spring-boot-starter-amqp')
+
+    testCompile 'junit:junit:4.12'
+}
+
+jar {
+    baseName = 'rabbit-rpc-cli'
+    version = '0.0.1-SNAPSHOT'
+}
+
+clean.doLast {
+    // file('src/main/someFile.txt').delete()
+    file('logs').deleteDir()
+    file('out').deleteDir()
+}
+
