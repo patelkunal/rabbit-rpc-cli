@@ -19,12 +19,12 @@ repositories {
 
 dependencies {
     compile('com.google.guava:guava:23.0')
-    compile('org.springframework.boot:spring-boot-starter') {
+    compile('commons-cli:commons-cli:1.4')
+    compile('org.springframework.boot:spring-boot-starter-amqp') {
         exclude module: 'log4j-over-slf4j'
         exclude module: 'jul-to-slf4j'
     }
-    compile('org.springframework.boot:spring-boot-starter-amqp')
-
+    compileOnly 'org.projectlombok:lombok:1.16.18'
     testCompile 'junit:junit:4.12'
 }
 
@@ -37,5 +37,5 @@ clean.doLast {
     // file('src/main/someFile.txt').delete()
     file('logs').deleteDir()
     file('out').deleteDir()
+    file('bin').deleteDir()
 }
-
